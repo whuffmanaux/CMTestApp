@@ -1,2 +1,2 @@
 web: gunicorn runp-heroku:app
-init: db_create.py && db_populate.py
+init: python db_create.py && python db_populate.py
