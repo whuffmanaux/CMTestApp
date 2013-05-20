@@ -1,1 +1,0 @@
-curl -X POST -d "c;5.0;5.0" --header "Content-Type:text/xml" "http://localhost:5000/checkin"
