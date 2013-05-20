@@ -1,0 +1,10 @@
+Website:
+*Display list of checkins for mike & carter at *.com/ and *.com/index.
+*Parse POST message to *.com/checkin of the form unicode(<m or c>;<latitude>;<longitude>). Return message unicode(got;it).
+*Parse GET message to *.com/recent/<mike or carter>. Return message unicode(<latitude>;<longitude>;<hour>;<minute>;<day>;<month>;<year>).
+*Return message unicode(invalid) if any invalid request is received.
+
+App:
+*Send checkin as POST message of the form unicode(<m or c>;<latitude>;<longitude>) to *.com/checkin. Receive unicode(got;it) from server.
+*Send GET message to *.com/recent/<mike or carter>. Receive unicode(<latitude>;<longitude>;<hour>;<minute>;<day>;<month>;<year>) from server.
+*Handle a unicode(invalid) response to any request.

@@ -1,0 +1,66 @@
+$ virtualenv flask
+
+flask/bin/pip install flask
+flask/bin/pip install flask-login
+flask/bin/pip install flask-sqlalchemy
+flask/bin/pip install alembic
+flask/bin/pip install flask-wtf
+
+mkdir app
+mkdir app/static
+mkdir app/templates
+mkdir tmp
+
+in app/__init__.py:
+	from flask import Flask
+	from flask.ext.sqlalchemy import SQLAlchemy
+
+	app = Flask(__name__)
+	app.config.from_object('config')
+	db = SQLAlchemy(app)
+
+	from app import views, models
+
+in app/views.py:
+	from app import app
+
+	@app.route('/')
+	@app.route('/index')
+	def index():
+    	return "Hello, World!"
+
+in app/models.py:
+	from app import db
+
+	ROLE_USER = 0
+	ROLE_ADMIN = 1
+
+	class User(db.Model):
+  	  id = db.Column(db.Integer, primary_key = True)
+  	  name = db.Column(db.String(64), index = True, unique = True)
+  	  role = db.Column(db.SmallInteger, default = ROLE_USER)
+
+  	  def __repr__(self):
+  	      return '<User %r>' % (self.name)
+
+in config.py:
+	import os
+	basedir = os.path.abspath(os.path.dirname(__file__))
+
+	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+
+in db_create.py:
+	#!flask/bin/python                                           
+	from config import SQLALCHEMY_DATABASE_URI
+	from app import db
+
+	db.create_all()
+
+in run.py:
+	#!flask/bin/python
+	from app import app
+	app.run(debug = True)
+
+chmod a+x db_create.py
+./db_create.py
+chmod a+x run.py

@@ -1,0 +1,9 @@
+<h3>Checkins for {{show_user.name}}</h3>
+<table>
+  {% for checkin in  show_user.get_latest_checkins().limit(20).all() %}
+  <tr>
+    <td>{{checkin.timestamp}}</td>
+    <td>{ {{checkin.latitude}}, {{checkin.longitude}} }</td>
+  </tr>
+  {% endfor %}
+</table>

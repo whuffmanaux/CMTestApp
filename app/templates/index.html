@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Checkin test app</title>
+  </head>
+  <body>
+    <div id="checkins">
+      {% for user in users %}
+      <div id="list">
+	{% with show_user=user %}
+	{% include 'show_checkins.html' %}
+	{% endwith %}
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
